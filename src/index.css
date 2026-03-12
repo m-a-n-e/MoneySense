@@ -1,10 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   body {
-    @apply text-slate-900 antialiased selection:bg-indigo-100 selection:text-indigo-900;
+    @apply text-slate-900 antialiased;
+  }
+
+  ::selection {
+    @apply bg-indigo-100 text-indigo-900;
   }
 
   /* Custom Scrollbar - Global */
@@ -27,7 +29,6 @@
 }
 
 @layer components {
-  /* Utility for specific containers */
   .custom-scrollbar::-webkit-scrollbar {
     width: 5px;
   }
