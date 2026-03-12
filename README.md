@@ -1,76 +1,21 @@
-# React + TypeScript + Vite
+# 💰 MoneySense | Projeto Integrador: Inteligência artificial
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **MoneySense** é um ecossistema de gestão financeira inteligente desenvolvido para o projeto integrador da faculdade **UNISATC**.
 
-Currently, two official plugins are available:
+### 🎓 Contexto Acadêmico
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Instituição:** UNISATC
+* **Professor:** Yuri Crotti
+* **Desenvolvedores:** Emanuel Doerner, Mateus Inácio e Luan
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### 🔥 O que o projeto faz?
 
-Note: This will impact Vite dev & build performances.
+* **Importação Inteligente:** Leitura automatizada de arquivos **CSV** (extratos bancários) para alimentar o dashboard sem digitação manual.
+* **Segurança Robusta:** Implementação de **RLS** no Supabase, garantindo que os dados financeiros sejam privados e acessíveis apenas ao dono da conta.
+* **Módulo de IA:** O projeto integra modelos de **Inteligência Artificial** para análise de padrões de consumo, categorização automática de gastos e geração de insights preditivos sobre a saúde financeira do usuário.
 
-## Expanding the ESLint configuration
+### 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# MoneySense
+**React + TypeScript | Tailwind CSS | Supabase | AI Integration**
