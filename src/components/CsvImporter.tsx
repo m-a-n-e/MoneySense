@@ -127,43 +127,64 @@ export default function CsvImporter({ onComplete }: { onComplete: () => void }) 
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl">
+    <div className="bg-white p-6 rounded-2xl">
       {previews.length === 0 ? (
         <div
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
-          className={`border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center transition-colors ${isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200 bg-gray-50'}`}
+          className={`relative border-2 border-dashed rounded-3xl p-12 flex flex-col items-center justify-center transition-all duration-200 min-h-[300px] ${
+            isDragging 
+              ? 'border-indigo-500 bg-indigo-50/50 scale-[0.99]' 
+              : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300'
+          }`}
         >
-          <Upload size={48} className={`mb-4 ${isDragging ? 'text-indigo-500' : 'text-gray-400'}`} />
-          <p className="text-gray-600 text-center">Arraste seu arquivo CSV do Nubank aqui</p>
-          <input type="file" accept=".csv" onChange={(e) => e.target.files?.[0] && processCsv(e.target.files[0])} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+          <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-colors ${
+            isDragging ? 'bg-indigo-100 text-indigo-600' : 'bg-white text-slate-400 shadow-sm'
+          }`}>
+            <Upload size={40} />
+          </div>
+          <div className="text-center">
+            <p className="text-slate-900 font-bold text-lg mb-1">Arraste seu arquivo CSV aqui</p>
+            <p className="text-slate-500 text-sm font-medium">Suporta exportações do Nubank e outros bancos</p>
+          </div>
+          <input 
+            type="file" 
+            accept=".csv" 
+            onChange={(e) => e.target.files?.[0] && processCsv(e.target.files[0])} 
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+          />
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="overflow-x-auto border border-gray-100 rounded-lg max-h-[400px]">
+          <div className="overflow-x-auto border border-slate-100 rounded-2xl shadow-sm">
             <table className="w-full text-sm text-left">
-              <thead className="bg-gray-50 text-gray-600 font-medium sticky top-0">
+              <thead className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[11px]">
                 <tr>
-                  <th className="px-4 py-3">Data</th>
-                  <th className="px-4 py-3">Descrição</th>
-                  <th className="px-4 py-3">Categoria</th>
-                  <th className="px-4 py-3 text-right">Valor</th>
+                  <th className="px-6 py-4">Data</th>
+                  <th className="px-6 py-4">Descrição</th>
+                  <th className="px-6 py-4">Categoria</th>
+                  <th className="px-6 py-4 text-right">Valor</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-slate-50">
                 {previews.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50">
-                    <td className="px-4 py-3 whitespace-nowrap">{item.date}</td>
-                    <td className="px-4 py-3">{item.description}</td>
-                    <td className="px-4 py-3">
-                      <input type="text" value={item.category} onChange={(e) => {
-                        const next = [...previews];
-                        next[idx].category = e.target.value;
-                        setPreviews(next);
-                      }} className="bg-transparent border-b border-transparent focus:border-indigo-500 focus:outline-none w-full" />
+                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-500 font-medium">{item.date}</td>
+                    <td className="px-6 py-4 text-slate-900 font-semibold">{item.description}</td>
+                    <td className="px-6 py-4">
+                      <input 
+                        type="text" 
+                        value={item.category} 
+                        onChange={(e) => {
+                          const next = [...previews];
+                          next[idx].category = e.target.value;
+                          setPreviews(next);
+                        }} 
+                        className="bg-transparent border border-transparent hover:border-slate-200 focus:border-indigo-500 focus:bg-white focus:outline-none px-3 py-1.5 rounded-lg w-full transition-all" 
+                      />
                     </td>
-                    <td className={`px-4 py-3 text-right font-bold ${item.type === 'income' ? 'text-emerald-600' : 'text-rose-600'}`}>
+                    <td className={`px-6 py-4 text-right font-bold tabular-nums text-base ${item.type === 'income' ? 'text-emerald-600' : 'text-rose-600'}`}>
                       {item.type === 'income' ? '+' : '-'} R$ {item.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </td>
                   </tr>
@@ -171,12 +192,30 @@ export default function CsvImporter({ onComplete }: { onComplete: () => void }) 
               </tbody>
             </table>
           </div>
-          <div className="flex justify-between items-center bg-indigo-50 p-4 rounded-lg">
-            <span className="text-sm font-medium text-indigo-700">{previews.length} transações detectadas</span>
-            <div className="flex gap-3">
-              <button onClick={() => setPreviews([])} className="text-gray-600 hover:text-gray-800 text-sm font-medium">Cancelar</button>
-              <button onClick={handleUpload} disabled={loading} className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 disabled:opacity-50 flex items-center gap-2">
-                {loading ? 'Processando...' : <><Check size={18} /> Confirmar Importação</>}
+          <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-50 p-6 rounded-2xl gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+                <FileText className="text-indigo-600" size={20} />
+              </div>
+              <span className="text-sm font-bold text-slate-700">{previews.length} transações detectadas</span>
+            </div>
+            <div className="flex gap-3 w-full sm:w-auto">
+              <button 
+                onClick={() => setPreviews([])} 
+                className="flex-1 sm:flex-none text-slate-500 hover:text-slate-700 hover:bg-slate-100 px-6 py-2.5 rounded-xl text-sm font-bold transition-all"
+              >
+                Cancelar
+              </button>
+              <button 
+                onClick={handleUpload} 
+                disabled={loading} 
+                className="flex-1 sm:flex-none bg-indigo-600 text-white px-8 py-2.5 rounded-xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 disabled:opacity-50 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              >
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <><Check size={18} /> Confirmar Importação</>
+                )}
               </button>
             </div>
           </div>
