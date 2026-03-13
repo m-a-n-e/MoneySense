@@ -13,6 +13,8 @@ import {
   X,
 } from 'lucide-react';
 import { useState } from 'react';
+import PlexusBackground from '../components/PlexusBackground';
+import Logo from '../components/Logo.tsx';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -20,34 +22,34 @@ export default function Landing() {
 
   const features = [
     {
-      icon: <Wallet className="w-8 h-8" />,
-      title: 'Gestão Completa',
-      description: 'Organize todas as suas transações em um só lugar com facilidade.',
-    },
-    {
-      icon: <PieChart className="w-8 h-8" />,
-      title: 'Análises Visuais',
-      description: 'Visualize seus gastos por categoria com gráficos intuitivos e modernos.',
+      icon: <Zap className="w-8 h-8" />,
+      title: 'Categorização por IA',
+      description: 'Nossa inteligência artificial analisa seus extratos e categoriza gastos automaticamente com 99% de precisão.',
     },
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: 'Controle de Receitas',
-      description: 'Registre todas as suas receitas e visualize seu fluxo de caixa em tempo real.',
+      title: 'Previsões de Caixa',
+      description: 'Saiba exatamente quanto dinheiro você terá no fim do mês com algoritmos que preveem suas contas futuras.',
     },
     {
-      icon: <Lock className="w-8 h-8" />,
-      title: 'Segurança de Dados',
-      description: 'Seus dados são protegidos com as tecnologias mais avançadas do mercado.',
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: 'Importação CSV',
-      description: 'Importe transações direto do seu banco em segundos sem esforço manual.',
+      icon: <PieChart className="w-8 h-8" />,
+      title: 'Insights Preditivos',
+      description: 'Receba alertas inteligentes antes de estourar seu orçamento em categorias específicas.',
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
-      title: 'Relatórios Detalhados',
-      description: 'Entenda melhor seus hábitos de consumo com relatórios de alta fidelidade.',
+      title: 'Análise de Padrões',
+      description: 'A IA identifica gastos desnecessários e sugere onde você pode economizar sem perder qualidade de vida.',
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: 'Importação Neural',
+      description: 'Arraste seu CSV e deixe que a rede neural faça todo o trabalho pesado de organização para você.',
+    },
+    {
+      icon: <Lock className="w-8 h-8" />,
+      title: 'Advisor 24/7',
+      description: 'Um mentor financeiro digital que aprende com seus hábitos e evolui junto com seus objetivos.',
     },
   ];
 
@@ -55,19 +57,19 @@ export default function Landing() {
     {
       name: 'João Silva',
       role: 'Freelancer',
-      content: 'MoneySense transformou a forma como organizo minhas finanças. O design é impecável!',
+      content: 'As previsões da IA do MoneySense me ajudaram a poupar 30% mais este mês. É assustadoramente preciso!',
       avatar: 'JS',
     },
     {
       name: 'Maria Santos',
       role: 'Empreendedora',
-      content: 'A importação de CSV é mágica. Ganhei horas de produtividade na minha semana.',
+      content: 'Finalmente uma ferramenta que não apenas mostra o passado, mas me ajuda a planejar o futuro com IA.',
       avatar: 'MS',
     },
     {
       name: 'Pedro Costa',
       role: 'Desenvolvedor',
-      content: 'Interface limpa, moderna e extremamente rápida. A melhor ferramenta que já usei.',
+      content: 'A categorização automática via redes neurais é impecável. Economizo horas de organização manual.',
       avatar: 'PC',
     },
   ];
@@ -75,87 +77,90 @@ export default function Landing() {
   return (
     <div className="bg-white selection:bg-indigo-100 selection:text-indigo-900">
       {/* Header/Navigation */}
-      <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-b border-slate-100 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                <Wallet className="text-white" size={24} />
+      <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+        <header className="w-full max-w-5xl bg-white/70 backdrop-blur-2xl border border-white/20 rounded-[28px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate('/')}>
+                <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200 transition-transform group-hover:scale-105">
+                  <Logo className="text-white" size={20} />
+                </div>
+                <span className="text-xl font-bold text-slate-900 tracking-tight">
+                  MoneySense
+                </span>
               </div>
-              <span className="text-2xl font-bold text-slate-900 tracking-tight">
-                MoneySense
-              </span>
-            </div>
 
-            {/* Desktop Menu */}
-            <nav className="hidden md:flex items-center gap-10">
-              <a href="#features" className="text-slate-600 hover:text-indigo-600 transition-colors font-semibold text-sm">
-                Recursos
-              </a>
-              <a href="#testimonials" className="text-slate-600 hover:text-indigo-600 transition-colors font-semibold text-sm">
-                Depoimentos
-              </a>
-              <div className="w-px h-6 bg-slate-100 mx-2" />
-              <button
-                onClick={() => navigate('/login')}
-                className="text-slate-600 hover:text-indigo-600 transition-colors font-bold text-sm"
-              >
-                Entrar
-              </button>
-              <button
-                onClick={() => navigate('/register')}
-                className="bg-indigo-600 text-white px-7 py-3 rounded-2xl hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all font-bold text-sm active:scale-[0.98]"
-              >
-                Criar Conta Grátis
-              </button>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-slate-600 hover:text-indigo-600 bg-slate-50 rounded-xl"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <nav className="md:hidden pb-6 space-y-4 border-t border-slate-50 pt-6 animate-in slide-in-from-top-4 duration-200">
-              <a href="#features" className="block text-slate-600 hover:text-indigo-600 font-bold px-4 py-2 hover:bg-slate-50 rounded-xl transition-all">
-                Recursos
-              </a>
-              <a href="#testimonials" className="block text-slate-600 hover:text-indigo-600 font-bold px-4 py-2 hover:bg-slate-50 rounded-xl transition-all">
-                Depoimentos
-              </a>
-              <div className="flex flex-col gap-3 px-4 pt-2">
+              {/* Desktop Menu */}
+              <nav className="hidden md:flex items-center gap-8">
+                <a href="#features" className="text-slate-600 hover:text-indigo-600 transition-colors font-semibold text-sm">
+                  Recursos
+                </a>
+                <a href="#testimonials" className="text-slate-600 hover:text-indigo-600 transition-colors font-semibold text-sm">
+                  Depoimentos
+                </a>
+                <div className="w-px h-5 bg-slate-200/60 mx-1" />
                 <button
-                  onClick={() => {
-                    navigate('/login');
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full text-center text-slate-600 font-bold py-3 bg-slate-50 rounded-2xl transition-all"
+                  onClick={() => navigate('/login')}
+                  className="text-slate-600 hover:text-indigo-600 transition-colors font-bold text-sm"
                 >
                   Entrar
                 </button>
                 <button
-                  onClick={() => {
-                    navigate('/register');
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-indigo-100 transition-all"
+                  onClick={() => navigate('/register')}
+                  className="bg-indigo-600 text-white px-5 py-2.5 rounded-2xl hover:bg-indigo-700 shadow-md shadow-indigo-100 transition-all font-bold text-sm active:scale-[0.96]"
                 >
-                  Criar Conta Grátis
+                  Começar
                 </button>
-              </div>
-            </nav>
-          )}
-        </div>
-      </header>
+              </nav>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden p-2 text-slate-600 hover:text-indigo-600 bg-slate-100/50 rounded-xl transition-colors"
+              >
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
+
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+              <nav className="md:hidden pb-6 space-y-3 pt-2 animate-in fade-in zoom-in-95 duration-200">
+                <a href="#features" className="block text-slate-600 hover:text-indigo-600 font-bold px-4 py-2.5 hover:bg-slate-50/50 rounded-xl transition-all">
+                  Recursos
+                </a>
+                <a href="#testimonials" className="block text-slate-600 hover:text-indigo-600 font-bold px-4 py-2.5 hover:bg-slate-50/50 rounded-xl transition-all">
+                  Depoimentos
+                </a>
+                <div className="grid grid-cols-2 gap-3 px-4 pt-2">
+                  <button
+                    onClick={() => {
+                      navigate('/login');
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-center text-slate-600 font-bold py-2.5 bg-slate-100/50 rounded-xl transition-all"
+                  >
+                    Entrar
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate('/register');
+                      setIsMenuOpen(false);
+                    }}
+                    className="bg-indigo-600 text-white py-2.5 rounded-xl font-bold shadow-md shadow-indigo-100 transition-all"
+                  >
+                    Registrar
+                  </button>
+                </div>
+              </nav>
+            )}
+          </div>
+        </header>
+      </div>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto relative">
+      <section className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-white overflow-hidden relative">
+        <PlexusBackground />
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-indigo-100 rounded-full blur-[100px] opacity-50 -z-10" />
           <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-50 -z-10" />
 
@@ -308,6 +313,14 @@ export default function Landing() {
       {/* CTA Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-500/20 via-transparent to-transparent opacity-50" />
+        
+        {/* Decorative Background Logo */}
+        <div className="absolute -right-20 -bottom-20 opacity-[0.05] pointer-events-none select-none hidden lg:block" style={{ perspective: '1000px' }}>
+          <div className="w-[500px] h-[500px] bg-indigo-500 rounded-[100px] flex items-center justify-center shadow-2xl transition-transform duration-1000 hover:rotate-12" style={{ transform: 'rotateX(25deg) rotateY(-25deg) rotateZ(10deg)' }}>
+            <Logo size={350} className="brightness-0 invert" />
+          </div>
+        </div>
+
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8 tracking-tight">
             Pronto para dominar suas finanças?
