@@ -288,11 +288,18 @@ export default function Dashboard() {
                       dataKey="value"
                       stroke="none"
                     >
-                      {chartData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} cornerRadius={4} />)}
+                      {chartData.map((_, i) => (
+                        <Cell 
+                          key={i} 
+                          fill={COLORS[i % COLORS.length]} 
+                          stroke="none"
+                          {...({ cornerRadius: 4 } as any)} 
+                        />
+                      ))}
                     </Pie>
                     <Tooltip 
                       contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                      formatter={(v: number) => `R$ ${v.toLocaleString('pt-BR')}`} 
+                      formatter={(value: number) => [`R$ ${value.toLocaleString('pt-BR')}`, 'Valor']} 
                     />
                     <Legend verticalAlign="bottom" height={36}/>
                   </PieChart>

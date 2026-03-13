@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import Papa from 'papaparse';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Upload, Check, AlertCircle, FileText, X } from 'lucide-react';
+import { Upload, Check, FileText } from 'lucide-react';
 
 interface CsvRow {
   Data: string;
@@ -65,7 +65,7 @@ export default function CsvImporter({ onComplete }: { onComplete: () => void }) 
       header: true,
       skipEmptyLines: true,
       complete: (results) => {
-        const processed = results.data
+        const processed: TransactionPreview[] = results.data
           .filter(row => row.Data && row.Valor)
           .map(row => {
             // Remove espaços e garante que temos uma string
@@ -88,7 +88,7 @@ export default function CsvImporter({ onComplete }: { onComplete: () => void }) 
               amount: Math.abs(rawValue),
               description: sanitizedDesc,
               category: suggestCategory(sanitizedDesc),
-              type: rawValue > 0 ? 'income' : ('expense' as const),
+              type: rawValue > 0 ? 'income' : 'expense',
             };
           });
         setPreviews(processed);
