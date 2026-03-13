@@ -299,7 +299,7 @@ export default function Dashboard() {
                     </Pie>
                     <Tooltip 
                       contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                      formatter={(value: number) => [`R$ ${value.toLocaleString('pt-BR')}`, 'Valor']} 
+                      formatter={(value: any) => [`R$ ${Number(value).toLocaleString('pt-BR')}`, 'Valor']} 
                     />
                     <Legend verticalAlign="bottom" height={36}/>
                   </PieChart>
