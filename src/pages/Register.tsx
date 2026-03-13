@@ -1,57 +1,7 @@
-import { useState } from 'react';
-import { supabase } from '../lib/supabase';
-import { useNavigate, Link } from 'react-router-dom';
-import { Wallet, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Wallet, Lock, AlertCircle } from 'lucide-react';
 
 export default function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
-
-    if (password !== confirmPassword) {
-      setError('As senhas não coincidem');
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('A senha deve ter no mínimo 6 caracteres');
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (signUpError) throw signUpError;
-
-      setSuccess(true);
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -69,111 +19,40 @@ export default function Register() {
               MoneySense
             </span>
           </Link>
-          <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Crie sua conta</h2>
+          <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Cadastros Suspensos</h2>
           <p className="text-slate-500 font-medium mt-3">
-            Comece sua jornada para a liberdade financeira
+            O sistema está operando em modo restrito.
           </p>
         </div>
 
-        {/* Form Container */}
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-          <div className="bg-white rounded-[32px] shadow-2xl shadow-slate-200/50 p-10 border border-slate-100 relative">
-            <form onSubmit={handleRegister} className="space-y-5">
-              {error && (
-                <div className="bg-rose-50 border border-rose-100 text-rose-700 px-5 py-4 rounded-2xl text-sm font-bold flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div className="w-5 h-5 bg-rose-200 rounded-full flex items-center justify-center flex-shrink-0 text-[10px]">!</div>
-                  <span>{error}</span>
-                </div>
-              )}
-
-              {success && (
-                <div className="bg-emerald-50 border border-emerald-100 text-emerald-700 px-5 py-4 rounded-2xl text-sm font-bold flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div className="w-5 h-5 bg-emerald-200 rounded-full flex items-center justify-center flex-shrink-0 text-[10px]">✓</div>
-                  <span>Cadastro realizado com sucesso! Redirecionando...</span>
-                </div>
-              )}
-
-              <div>
-                <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">
-                  Email Corporativo
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="seu@email.com"
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400 font-medium"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">
-                    Senha Mestra
-                  </label>
-                  <input
-                    type="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400 font-medium"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">
-                    Confirmar Senha
-                  </label>
-                  <input
-                    type="password"
-                    required
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400 font-medium"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-indigo-600 text-white py-4.5 rounded-2xl hover:bg-indigo-700 transition-all font-bold shadow-lg shadow-indigo-100 disabled:opacity-50 flex items-center justify-center gap-2 mt-6 text-lg active:scale-[0.98]"
-              >
-                {loading ? (
-                  <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
-                ) : (
-                  <>
-                    Criar Minha Conta <ArrowRight size={20} />
-                  </>
-                )}
-              </button>
-            </form>
-
-            <div className="mt-8 pt-8 border-t border-slate-50 text-center">
-              <p className="text-slate-500 font-medium">
-                Já faz parte do MoneySense?{' '}
-                <Link to="/login" className="text-indigo-600 hover:text-indigo-700 font-bold underline decoration-indigo-200 underline-offset-4 transition-all hover:decoration-indigo-600">
-                  Fazer login
-                </Link>
-              </p>
-            </div>
+        {/* Info Container */}
+        <div className="bg-white rounded-[32px] shadow-2xl shadow-slate-200/50 p-10 border border-slate-100 relative text-center">
+          <div className="w-20 h-20 bg-amber-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
+            <Lock className="text-amber-600" size={40} />
           </div>
-        </div>
+          
+          <div className="space-y-4 mb-10">
+            <h3 className="text-xl font-bold text-slate-900">Acesso Restrito</h3>
+            <p className="text-slate-600 leading-relaxed font-medium">
+              Novas contas só podem ser criadas pela equipe de administração do projeto MoneySense. Se você já possui uma conta, por favor realize o login.
+            </p>
+          </div>
 
-        {/* Benefits Section */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {[
-            { text: 'Sem cartão necessário', color: 'bg-emerald-50 text-emerald-600' },
-            { text: 'Acesso instantâneo', color: 'bg-blue-50 text-blue-600' },
-            { text: 'Dados criptografados', color: 'bg-indigo-50 text-indigo-600' }
-          ].map((benefit, i) => (
-            <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-              <div className={`w-6 h-6 ${benefit.color} rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-bold`}>✓</div>
-              <span className="text-xs font-bold text-slate-600 tracking-tight">{benefit.text}</span>
+          <div className="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex items-center gap-4 text-left mb-10">
+            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm flex-shrink-0">
+              <AlertCircle className="text-indigo-600" size={20} />
             </div>
-          ))}
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider leading-tight">
+              Apenas usuários autorizados pelo administrador do sistema podem acessar a plataforma.
+            </p>
+          </div>
+
+          <Link
+            to="/login"
+            className="block w-full bg-indigo-600 text-white py-4.5 rounded-2xl hover:bg-indigo-700 transition-all font-bold shadow-lg shadow-indigo-100 text-lg active:scale-[0.98]"
+          >
+            Ir para Login
+          </Link>
         </div>
 
         {/* Back to Landing */}

@@ -101,17 +101,12 @@ export default function Landing() {
                 <div className="w-px h-5 bg-slate-200/60 mx-1" />
                 <button
                   onClick={() => navigate('/login')}
-                  className="text-slate-600 hover:text-indigo-600 transition-colors font-bold text-sm"
+                  className="bg-indigo-600 text-white px-7 py-3 rounded-2xl hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all font-bold text-sm active:scale-[0.98]"
                 >
-                  Entrar
+                  Acessar Sistema
                 </button>
-                <button
-                  onClick={() => navigate('/register')}
-                  className="bg-indigo-600 text-white px-5 py-2.5 rounded-2xl hover:bg-indigo-700 shadow-md shadow-indigo-100 transition-all font-bold text-sm active:scale-[0.96]"
-                >
-                  Começar
-                </button>
-              </nav>
+                </nav>
+
 
               {/* Mobile Menu Button */}
               <button

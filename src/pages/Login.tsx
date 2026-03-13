@@ -110,10 +110,7 @@ export default function Login() {
 
           <div className="mt-10 pt-8 border-t border-slate-50 text-center">
             <p className="text-slate-500 font-medium">
-              Ainda não tem conta?{' '}
-              <Link to="/register" className="text-indigo-600 hover:text-indigo-700 font-bold underline decoration-indigo-200 underline-offset-4 transition-all hover:decoration-indigo-600">
-                Criar conta grátis
-              </Link>
+              O cadastro de novos usuários é restrito ao administrador.
             </p>
           </div>
         </div>
