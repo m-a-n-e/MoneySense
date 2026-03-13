@@ -15,6 +15,14 @@ import {
 import { useState } from 'react';
 import PlexusBackground from '../components/PlexusBackground';
 import Logo from '../components/Logo.tsx';
+import joaoImg from '../assets/users/João Silva.png';
+import mariaImg from '../assets/users/Maria Santos.png';
+import pedroImg from '../assets/users/Pedro Costa.png';
+import user1 from '../assets/users/1.png';
+import user2 from '../assets/users/2.png';
+import user3 from '../assets/users/3.png';
+import user4 from '../assets/users/4.png';
+import user5 from '../assets/users/5.png';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -58,19 +66,19 @@ export default function Landing() {
       name: 'João Silva',
       role: 'Freelancer',
       content: 'As previsões da IA do MoneySense me ajudaram a poupar 30% mais este mês. É assustadoramente preciso!',
-      avatar: 'JS',
+      avatar: joaoImg,
     },
     {
       name: 'Maria Santos',
       role: 'Empreendedora',
       content: 'Finalmente uma ferramenta que não apenas mostra o passado, mas me ajuda a planejar o futuro com IA.',
-      avatar: 'MS',
+      avatar: mariaImg,
     },
     {
       name: 'Pedro Costa',
       role: 'Desenvolvedor',
       content: 'A categorização automática via redes neurais é impecável. Economizo horas de organização manual.',
-      avatar: 'PC',
+      avatar: pedroImg,
     },
   ];
 
@@ -178,7 +186,7 @@ export default function Landing() {
                 onClick={() => navigate('/register')}
                 className="bg-indigo-600 text-white px-10 py-4.5 rounded-2xl hover:bg-indigo-700 transition-all font-bold flex items-center justify-center gap-2 shadow-xl shadow-indigo-100 active:scale-[0.98] text-lg"
               >
-                Começar Grátis <ArrowRight size={22} />
+                Acessar Projeto <ArrowRight size={22} />
               </button>
               <button
                 onClick={() => navigate('/login')}
@@ -219,15 +227,15 @@ export default function Landing() {
               <div className="mt-10 pt-10 border-t border-slate-50 flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-2 text-slate-400">
                   <CheckCircle size={18} className="text-indigo-500" />
-                  <span className="text-sm font-medium italic">Dados atualizados em tempo real</span>
+                  <span className="text-sm font-medium italic">Simulação de dados em tempo real</span>
                 </div>
                 <div className="flex -space-x-3 overflow-hidden">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="inline-block h-10 w-10 rounded-full ring-4 ring-white bg-slate-200 border border-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-500 uppercase">
-                      User
+                  {[user1, user2, user3, user4, user5].map((img, i) => (
+                    <div key={i} className="inline-block h-10 w-10 rounded-full ring-4 ring-white bg-slate-200 border border-slate-100 overflow-hidden">
+                      <img src={img} alt={`User ${i + 1}`} className="w-full h-full object-cover" />
                     </div>
                   ))}
-                  <div className="inline-block h-10 w-10 rounded-full ring-4 ring-white bg-indigo-50 flex items-center justify-center text-[10px] font-bold text-indigo-600 uppercase">
+                  <div className="inline-flex h-10 w-10 rounded-full ring-4 ring-white bg-indigo-50 items-center justify-center text-[10px] font-bold text-indigo-600 uppercase">
                     +2k
                   </div>
                 </div>
@@ -242,10 +250,10 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-              Recursos de elite para sua economia
+              Recursos do projeto acadêmico
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium">
-              Tudo que você precisa para gerenciar suas finanças pessoais com precisão cirúrgica.
+              Protótipo funcional demonstrando a integração de finanças com inteligência artificial.
             </p>
           </div>
 
@@ -276,10 +284,10 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-              A escolha de quem busca excelência
+              Feedback do projeto
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium">
-              Junte-se a milhares de usuários que elevaram seu controle financeiro a um novo patamar.
+              Avaliações simuladas baseadas nos objetivos de usabilidade do projeto.
             </p>
           </div>
 
@@ -290,8 +298,12 @@ export default function Landing() {
                 className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300"
               >
                 <div className="flex items-center gap-5 mb-8">
-                  <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100">
-                    <span className="text-white font-bold text-lg">{testimonial.avatar}</span>
+                  <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100 overflow-hidden">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <p className="font-bold text-slate-900 text-lg">{testimonial.name}</p>
@@ -340,7 +352,7 @@ export default function Landing() {
             <div className="flex-shrink-0 w-full md:w-auto">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
-                  <Wallet className="text-white" size={22} />
+                  <Logo className="text-white" size={22} />
                 </div>
                 <span className="text-xl font-bold text-slate-900">MoneySense</span>
               </div>

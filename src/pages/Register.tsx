@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Wallet, Lock, AlertCircle } from 'lucide-react';
+import Logo from '../components/Logo';
 
 export default function Register() {
   return (
@@ -13,7 +14,7 @@ export default function Register() {
         <div className="text-center mb-10">
           <Link to="/" className="inline-flex items-center gap-3 mb-8 transition-transform hover:scale-105 active:scale-95">
             <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-              <Wallet className="text-white" size={30} />
+              <Logo className="text-white" size={30} />
             </div>
             <span className="text-3xl font-bold text-slate-900 tracking-tight">
               MoneySense

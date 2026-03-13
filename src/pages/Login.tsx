@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useNavigate, Link } from 'react-router-dom';
 import { Wallet, ArrowRight } from 'lucide-react';
+import Logo from '../components/Logo';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -40,7 +41,7 @@ export default function Login() {
         <div className="text-center mb-10">
           <Link to="/" className="inline-flex items-center gap-3 mb-8 transition-transform hover:scale-105 active:scale-95">
             <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-              <Wallet className="text-white" size={30} />
+              <Logo className="text-white" size={30} />
             </div>
             <span className="text-3xl font-bold text-slate-900 tracking-tight">
               MoneySense

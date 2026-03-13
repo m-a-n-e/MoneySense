@@ -25,6 +25,7 @@ import {
   Tooltip, 
   Legend 
 } from 'recharts';
+import Logo from '../components/Logo';
 
 interface Transaction {
   id: string;
@@ -196,7 +197,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                <Wallet className="text-white" size={30} />
+                <Logo className="text-white" size={30} />
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-slate-900 tracking-tight">MoneySense</h1>
