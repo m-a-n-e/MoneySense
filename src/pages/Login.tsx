@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useNavigate, Link } from 'react-router-dom';
-import { Wallet, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Logo from '../components/Logo';
 
 export default function Login() {
